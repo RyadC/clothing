@@ -9,7 +9,7 @@ const App = () => {
     },
     {
      id: 2,
-     title: '', 
+     title: 'Vestes', 
     },
     {
      id: 3,
@@ -17,23 +17,25 @@ const App = () => {
     },
     {
      id: 4,
-     title: 'Chapeau', 
+     title: 'Femmes', 
     },
     {
      id: 5,
-     title: 'Chapeau', 
+     title: 'Hommes', 
     },
   ]
 
   return (
     <div className='categories-container'>
-      <div className='category-container'>
-        {/* <img /> */}
-        <div className='category-body-container'>
-          <h2>Chapeaux</h2>
-          <p>Découvrir</p>
+      {catgeories.map((category) => (
+         <div className='category-container'>
+          {/* <img /> */}
+          <div className='category-body-container'>
+            <h2>{category.title}</h2>
+            <p>Découvrir</p>
+          </div>
         </div>
-      </div>
+      ))}
  
     </div>
   );
