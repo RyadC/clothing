@@ -1,20 +1,7 @@
-import { Fragment } from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import './App.css';
 import Home from './routes/home/home.routes-component';
-
-
-const Navigation = () => {
-
-  return (
-    <Fragment>
-      <div>
-        <h1>I am the navigation bar</h1>
-      </div>
-      <Outlet />
-    </Fragment>
-  )
-}
+import Navigation from './routes/navigation/navigation.routes-component';
 
 const Shop = () => {
   return <h1>Shop page</h1>
