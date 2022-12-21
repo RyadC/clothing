@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
 
 const defaultFormFields = {
@@ -13,6 +14,37 @@ const SignUpForm = () => {
   const [formsFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formsFields;
 
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const displayName = event.target[0].defaultValue;
+    const email = event.target[1].defaultValue;
+    const password = event.target[2].defaultValue;
+    const confirmPassword = event.target[3].defaultValue;
+
+    if(password !== confirmPassword){
+      console.log('error password')
+      return;
+    }
+
+    
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(email, password);
+      const userDocRef = await createUserDocumentFromAuth(user, {displayName});
+      resetFormFields();
+
+    } catch (error) {
+      console.log(error.message)
+    }
+    
+
+    console.log(event)
+  }
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, event)
@@ -22,7 +54,7 @@ const SignUpForm = () => {
   return (
     <div>
       <h1>Sign up with your email and password</h1>
-      <form onSubmit={() => {}}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="">Display Name</label>
         <input type="text" required onChange={handleChange} name="displayName" value={displayName} />
 
