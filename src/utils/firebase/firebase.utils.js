@@ -1,6 +1,6 @@
 // FIREBASE - Authentication
 import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 // FIREBASE - Firestore (DB)
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
@@ -28,7 +28,6 @@ googleProvider.setCustomParameters({
 export const auth = getAuth();
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
