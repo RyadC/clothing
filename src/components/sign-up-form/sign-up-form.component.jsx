@@ -4,8 +4,12 @@ import { useState } from "react";
 // FIREBASE
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
+//STYLES
+import "./sign-up-form.styles.scss"
+
 // COMPONENTS
 import FormInput from "../form-input/form-input.component";
+import Button from "../button/button.component";
 
 
 const defaultFormFields = {
@@ -24,9 +28,9 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const displayName = event.target[0].defaultValue;
     const email = event.target[1].defaultValue;
     const password = event.target[2].defaultValue;
@@ -37,7 +41,6 @@ const SignUpForm = () => {
       return;
     }
 
-    
     try {
       const { user } = await createAuthUserWithEmailAndPassword(email, password);
       const userDocRef = await createUserDocumentFromAuth(user, {displayName});
@@ -46,20 +49,23 @@ const SignUpForm = () => {
     } catch (error) {
       console.log(error.message)
     }
-    
 
     console.log(event)
   }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, event)
-    setFormFields({...formsFields, [name]: value})  // Je dis que je set comme valeurs l'ensemble des valeurs de formsFields puis après la "," je dis que je veux juste que name par contre ne soit pas copié mais qu'il prenne plutôt la valeur ci après. On dit cela comme cela: [propriété]: valeur
+
+    console.log(name, event);
+
+    setFormFields({...formsFields, [name]: value});
   };
 
+
   return (
-    <div>
-      <h1>Sign up with your email and password</h1>
+    <div className="sign-up-container">
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput 
           label="Display Name"
@@ -105,7 +111,7 @@ const SignUpForm = () => {
           }}
         />
 
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   )
