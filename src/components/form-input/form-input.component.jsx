@@ -1,4 +1,6 @@
+//STYLES
 import './form-input.styles.scss';
+
 
 const FormInput = (props) => {
 

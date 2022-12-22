@@ -19,9 +19,11 @@ const defaultFormFields = {
   confirmPassword: '',
 };
 
+
 const SignUpForm = () => {
 
   const [formsFields, setFormFields] = useState(defaultFormFields);
+
   const { displayName, email, password, confirmPassword } = formsFields;
 
   const resetFormFields = () => {
@@ -115,6 +117,6 @@ const SignUpForm = () => {
       </form>
     </div>
   )
-}
+};
 
 export default SignUpForm;

@@ -22,9 +22,11 @@ const defaultFormFields = {
   password: '',
 };
 
+
 const SignInForm = () => {
 
   const [formsFields, setFormFields] = useState(defaultFormFields);
+
   const { email, password } = formsFields;
 
   const resetFormFields = () => {
@@ -44,10 +46,22 @@ const SignInForm = () => {
     try {
       const response = await signInAuthUserWithEmailAndPassword(email, password);
       console.log(response);
+      
       resetFormFields();
+
     } catch (error) {
-      console.log(error)
-    }
+
+      switch (error.code) {
+        case 'auth/wrong-password':
+          alert('incorrect password for email')          
+          break;
+        case 'auth/user-not-found':
+          alert('no user associated with this email')          
+          break;
+          default:
+            console.log(error);
+      };
+    };
 
     console.log(event)
   }
@@ -90,11 +104,11 @@ const SignInForm = () => {
 
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button buttonType="google" onClick={signInWithGoogle}>Google sign In</Button>
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>Google sign In</Button>
         </div>
       </form>
     </div>
   )
-}
+};
 
 export default SignInForm;
