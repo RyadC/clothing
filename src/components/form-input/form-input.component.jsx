@@ -2,14 +2,14 @@ import './form-input.styles.scss';
 
 const FormInput = (props) => {
   
-  const { label, ...otherProps } = props
+  const { label, inputOptions } = props
 
   return (
     <div className="group">
-      <input className='form-input' {...otherProps} />
+      <input className='form-input' {...inputOptions} />
       {label && (
         <label 
-        className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`} htmlFor="">
+        className={`${inputOptions.value.length ? 'shrink' : ''} form-input-label`} htmlFor="">
           {label}
         </label>
       )}
