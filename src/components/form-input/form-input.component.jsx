@@ -1,7 +1,7 @@
 import './form-input.styles.scss';
 
 const FormInput = (props) => {
-  
+
   const { label, inputOptions } = props
 
   return (
