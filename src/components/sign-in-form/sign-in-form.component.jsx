@@ -1,9 +1,8 @@
 // REACT
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 // FIREBASE
 import { 
-  createAuthUserWithEmailAndPassword, 
   createUserDocumentFromAuth, 
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup 
@@ -15,6 +14,7 @@ import "./sign-in-form.styles.scss"
 // COMPONENTS
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import { UserContext } from "../../context/user.context";
 
 
 const defaultFormFields = {
@@ -26,8 +26,9 @@ const defaultFormFields = {
 const SignInForm = () => {
 
   const [formsFields, setFormFields] = useState(defaultFormFields);
-
   const { email, password } = formsFields;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -37,16 +38,15 @@ const SignInForm = () => {
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     console.log(user);
-    const userDocRef = await createUserDocumentFromAuth(user);
+    await createUserDocumentFromAuth(user);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(response);
-      
+      const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+      setCurrentUser(user);
       resetFormFields();
 
     } catch (error) {
