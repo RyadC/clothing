@@ -19,14 +19,7 @@ import { UserContext } from "../../context/user.context";
 // MY COMPONENT
 const Navigation = () => {
 
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  const signOutHandler = async () => {
-    const res = await signOutUser();
-    console.log(res);
-    
-    setCurrentUser(null);
-  };
+  const { currentUser } = useContext(UserContext);
 
   return (
     <Fragment>
@@ -38,7 +31,7 @@ const Navigation = () => {
         <ul className="nav-links-container">
           <Link className="nav-link" to='/shop'>SHOP</Link>
           {
-            currentUser ? <span className="nav-link" onClick={signOutHandler}>SIGN OUT</span> 
+            currentUser ? <span className="nav-link" onClick={signOutUser}>SIGN OUT</span> 
             : 
             <Link className="nav-link" to='/auth'>SIGN IN</Link>
           }
