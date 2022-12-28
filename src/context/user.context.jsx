@@ -4,7 +4,6 @@ import { createContext, useEffect, useState } from "react";
 // FIREBASE
 import {
   onAuthStateChangedLsitener,
-  signOutUser,
   createUserDocumentFromAuth,
 } from "../utils/firebase/firebase.utils";
 

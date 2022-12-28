@@ -1,14 +1,17 @@
+// REACT ROUTER DOM
 import { Routes, Route, Outlet } from 'react-router-dom';
+
+// STYLES
 import './App.css';
-import Authentication from './routes/authentication/authentication.routes-component';
+
+// COMPONENTS
 import Home from './routes/home/home.routes-component';
 import Navigation from './routes/navigation/navigation.routes-component';
-
-const Shop = () => {
-  return <h1>Shop page</h1>
-}
+import Authentication from './routes/authentication/authentication.routes-component';
+import Shop from './routes/shop/shop.routes-component';
 
 
+// MY COMPONENT
 const App = () => {
 
  return (
