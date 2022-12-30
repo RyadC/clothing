@@ -77,7 +77,7 @@ const SignInForm = () => {
           label="Email"
           inputOptions = {{
             type: "email",
-            required: 'true',
+            required: true,
             onChange: handleChange,
             name: "email",
             value: email,
@@ -88,7 +88,7 @@ const SignInForm = () => {
           label="Password"
           inputOptions = {{
             type: "password",
-            required: 'true',
+            required: true,
             onChange: handleChange,
             name: "password",
             value: password,
