@@ -42,7 +42,7 @@ export const CartProvider = ({children}) => {
   // Déclenchée lorsqu'un produit est choisi (bouton cliqué)
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));
-  }
+  };
 
   useEffect(() => {
     const newCartCount = cartItems.reduce((totalQuantity, currentItem) => totalQuantity + currentItem.quantity, 0);
