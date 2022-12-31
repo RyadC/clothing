@@ -1,5 +1,5 @@
 // REACT
-import { createContext, useContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 
 // MY COMPONENT
@@ -8,6 +8,7 @@ export const CartContext = createContext({
   setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
+  cartCount: 0,
 });
 
 const addCartItem = (cartItems, productToAdd) => {
@@ -36,15 +37,19 @@ const addCartItem = (cartItems, productToAdd) => {
 export const CartProvider = ({children}) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
 
   // Déclenchée lorsqu'un produit est choisi (bouton cliqué)
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));
   }
 
-  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems };
+  useEffect(() => {
+    const newCartCount = cartItems.reduce((totalQuantity, currentItem) => totalQuantity + currentItem.quantity, 0);
+    setCartCount(newCartCount);
+  }, [cartItems]);
 
-
+  const value = { isCartOpen, setIsCartOpen,cartItems, addItemToCart, cartCount, setCartCount  };
   return (
     <CartContext.Provider value={value}>{children}</CartContext.Provider>
   )
