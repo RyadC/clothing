@@ -13,7 +13,8 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 
 // MY COMPONENT
 const Checkout = () => {
-  const { cartItems, addItemToCart, removeItemToCart } = useContext(CartContext);
+  const { cartItems, cartTotal } = useContext(CartContext);
+  const { addItemToCart, removeItemToCart } = useContext(CartContext);
   
   return (
     <div className='checkout-container'>
@@ -41,7 +42,7 @@ const Checkout = () => {
             )
           })
         }
-        <span className='total'>Total: 0</span>
+        <span className='total'>Total: {cartTotal}€</span>
     </div>
   );
 };

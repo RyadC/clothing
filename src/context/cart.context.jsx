@@ -11,6 +11,7 @@ export const CartContext = createContext({
   cartCount: 0,
   removeItemToCart: () => {},
   clearItemFromCart: () => {},
+  cartTotal: 0,
 });
 
 const addCartItem = (cartItems, productToAdd) => {
@@ -57,6 +58,7 @@ export const CartProvider = ({children}) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   // Déclenchée lorsqu'un produit est choisi (bouton cliqué)
   const addItemToCart = (productToAdd) => {
@@ -71,12 +73,22 @@ export const CartProvider = ({children}) => {
     setCartItems(clearCartItem(cartItems, productToRemove));
   };
 
+  // Modifier la quantité totale d'articles du panier dès l'ajout ou la suppression d'un article
   useEffect(() => {
     const newCartCount = cartItems.reduce((totalQuantity, currentItem) => totalQuantity + currentItem.quantity, 0);
+
     setCartCount(newCartCount);
   }, [cartItems]);
 
-  const value = { isCartOpen, setIsCartOpen,cartItems, addItemToCart, cartCount, setCartCount, removeItemToCart, clearItemFromCart };
+  // Modifier la prix total d'articles du panier dès l'ajout ou la suppression d'un article
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce((totalPrice, currentItem) => totalPrice + currentItem.quantity * currentItem.price, 0);
+
+    setCartTotal(newCartTotal);
+  }, [cartItems]);
+
+
+  const value = { isCartOpen, setIsCartOpen,cartItems, addItemToCart, cartCount, setCartCount, removeItemToCart, clearItemFromCart, cartTotal };
   return (
     <CartContext.Provider value={value}>{children}</CartContext.Provider>
   );
