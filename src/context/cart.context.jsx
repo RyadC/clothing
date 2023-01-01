@@ -47,7 +47,7 @@ const removeCartItem = (cartItems, productToRemove) => {
   return cartItems.map((cartItem) =>
   cartItem.id === productToRemove.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
 );
-};
+}
 
 const clearCartItem = (cartItems, cartItemToRemove) => {
   return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
