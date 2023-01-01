@@ -10,7 +10,14 @@ import {
 } from "firebase/auth";
 
 // FIREBASE - Firestore (DB)
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { 
+  getFirestore, 
+  doc, 
+  getDoc, 
+  setDoc,
+  collection,
+  writeBatch,
+} from 'firebase/firestore';
 
 // Web app's Firebase configuration
 const firebaseConfig = {
@@ -38,6 +45,33 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 
 export const db = getFirestore();
 
+// collectionKey = le nom de la collection
+// objectsToAdd = le document regroupant les items à transmettre
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  
+  // collection retourne la référence du document (le crée s'il n'existe pas)
+  // db = la BDD, la collection sera donc créée à la racine
+  // collectionKey = le nom de la collection à créer
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  // On boucle notre objet pour créer un document par objet (chaussures, vestes, etc.)
+  objectsToAdd.forEach(object => {
+    // collectionRef = nom de la collection où le document doit être crée (doit être inséré)
+    // 
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+
+    // Une fois le document crée dans sa collection, on transfère les données 
+    // docRef = la référence du document càd son emplacement dans la BDD
+    // object = l'object à y transférer
+    batch.set(docRef, object);
+  });
+
+  // On attend que le travail soit terminé pour l'ensemble des objets
+  await batch.commit();
+  console.log('done');
+};
+
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   const userDocRef = doc(db, 'users', userAuth.uid);
   console.log(userDocRef);
@@ -63,7 +97,6 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
 
   return userDocRef;
 };
-
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if(!email || !password) return;

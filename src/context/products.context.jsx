@@ -1,8 +1,11 @@
 // REACT
 import { createContext, useEffect, useState } from "react";
 
+// DATAS FIRESTORE
+import { addCollectionAndDocuments } from "../utils/firebase/firebase.utils";
+
 // DATAS
-import PRODUCTS_DATA from '../shop-data.json';
+import SHOP_DATA from '../shop-data';
 
 export const ProductsContext = createContext({
   products: [],
@@ -10,13 +13,13 @@ export const ProductsContext = createContext({
 });
 
 export const ProductsProvider = ({children}) => {
-  const [products, setProducts] = useState(PRODUCTS_DATA);
-  const value = {products};
-
+  const [products, setProducts] = useState([]);
+  
   useEffect(() => {
-
-  });
-
-
+    addCollectionAndDocuments('categories', SHOP_DATA);
+  }, []);
+  
+  
+  const value = {products};
   return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
 };
