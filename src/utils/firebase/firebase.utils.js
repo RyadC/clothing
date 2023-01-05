@@ -17,6 +17,8 @@ import {
   setDoc,
   collection,
   writeBatch,
+  query,
+  getDocs,
 } from 'firebase/firestore';
 
 // Web app's Firebase configuration
@@ -70,6 +72,30 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   // On attend que le travail soit terminé pour l'ensemble des objets
   await batch.commit();
   console.log('done');
+};
+
+export const getCategoriesAndDocuments = async () => {
+
+  // On récupère la référence de notre collection
+  const collectionRef = collection(db, 'categories');
+  
+  // Crée une instance de QUERY à utiliser pour récupérer les documents
+  const q = query(collectionRef);
+
+  // On récupère un instantané de notre collection
+  const querySnapshot = await getDocs(q);
+
+  // On récupère la collection sous forme d'objet dans lequel on passe chaque document comme objet avec ses items
+  const categoryMap = querySnapshot.docs.reduce((collection, currentDocument) => {
+    // On récupère le titre et les items
+    const { title, items } = currentDocument.data();
+    // On ajoute à notre objet racine "collection" le titre du document actuel en tant que propriété à qui on attribue ses items en tant qu'objet
+    collection[title.toLowerCase()] = items;
+
+    return collection;
+  }, {});
+
+  return categoryMap;
 };
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
