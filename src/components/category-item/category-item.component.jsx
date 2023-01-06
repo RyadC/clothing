@@ -5,7 +5,7 @@ const CategoryItem = (props) => {
   const { category } = props;
 
   return (
-    <div className='category-container'>
+    <div className='categoryItem-container'>
       <div className='background-image' style={{
         backgroundImage: `url(${category.imageUrl})`
       }} />
