@@ -6,7 +6,7 @@ import ProductCard from "../product-card/product-card.component";
 
 
 // MY COMPONENT
-const CategoriesPreview = (props) => {
+const CategoryPreview = (props) => {
   const { title, products } = props;
 
   return (
@@ -27,4 +27,4 @@ const CategoriesPreview = (props) => {
   )
 };
 
-export default CategoriesPreview;
+export default CategoryPreview;
