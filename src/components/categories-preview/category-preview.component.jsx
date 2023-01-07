@@ -1,3 +1,6 @@
+// REACT ROUTER DOM
+import { Link } from 'react-router-dom';
+
 // STYLES
 import './category-preview.styles.scss';
 
@@ -12,7 +15,9 @@ const CategoryPreview = (props) => {
   return (
     <div className="category-preview-container">
       <h2>
-        <span className="title">{title}</span>
+        <Link to={`${title}`}>
+          <span className="title">{title.toUpperCase()}</span>
+        </Link>
       </h2>
       <div className="preview">
         {

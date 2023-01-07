@@ -5,7 +5,13 @@ import { Fragment, useContext } from "react"
 import { Outlet, Link } from "react-router-dom";
 
 // STYLES
-import './navigation.styles.scss';
+// import './navigation.styles.jsx';
+import {
+    NavigationContainerStyled,
+    LogoContainerStyled,
+    NavLinksContainerStyled,
+    NavLinkStyled,
+  } from "./navigation.styles";
 
 // FIREBASE
 import { signOutUser } from "../../utils/firebase/firebase.utils";
@@ -29,22 +35,24 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <nav className="navigation">
-        <Link className="logo-container" to='/'>
+      <NavigationContainerStyled>
+        <LogoContainerStyled to='/'>
           <CrwnLogo className="logo" />
-        </Link>
+        </LogoContainerStyled>
 
-        <ul className="nav-links-container">
-          <Link className="nav-link" to='/shop'>SHOP</Link>
+        <NavLinksContainerStyled >
+          <NavLinkStyled className="nav-link" to='/shop'>SHOP</NavLinkStyled>
           {
-            currentUser ? <span className="nav-link" onClick={signOutUser}>SIGN OUT</span> 
-            : 
-            <Link className="nav-link" to='/auth'>SIGN IN</Link>
+            currentUser ? 
+              <NavLinkStyled as='span' onClick={signOutUser}>SIGN OUT</NavLinkStyled> 
+              : 
+              <NavLinkStyled to='/auth'>SIGN IN</NavLinkStyled>
           }
           <CartIcon />
-        </ul>
+        </NavLinksContainerStyled>
+        
         {isCartOpen && <CartDropdown />}
-      </nav>
+      </NavigationContainerStyled>
 
       <Outlet />
     </Fragment>
