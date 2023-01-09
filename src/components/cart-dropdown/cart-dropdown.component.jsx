@@ -5,8 +5,12 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-// STYLES
-import './cart-dropdown.styles.scss';
+// STYLED COMPONENTS
+import { 
+  CartDropdownContainerStyled,
+  EmptyMessageStyled,
+  CartItemsStyled
+} from './cart-dropdown.styles.jsx';
 
 // DATA'S COMPONENT
 import { CartContext } from '../../context/cart.context';
@@ -14,6 +18,9 @@ import { CartContext } from '../../context/cart.context';
 // COMPONENTS
 import Button from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
+
+// DATAS
+import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 
 // MY COMPONENT
@@ -27,16 +34,19 @@ const CartDropdown = () => {
   };
 
   return (
-    <div className='cart-dropdown-container'>
-      <div className='cart-items'>
+    <CartDropdownContainerStyled>
+      <CartItemsStyled>
         {
-          cartItems.map((item) => {
-            return <CartItem key={item.id} cartItem={item}></CartItem>
-          })
+          cartItems.length ?
+            cartItems.map((item) => {
+              return <CartItem key={item.id} cartItem={item}></CartItem>
+            })
+          :
+            <EmptyMessageStyled>Your cart is empty</EmptyMessageStyled>  
         }
-      </div>
-      <Button buttonType='' onClick={goToCheckoutPage}>GO TO CHECKOUT</Button>
-    </div>
+      </CartItemsStyled>
+      <Button buttonType={BUTTON_TYPE_CLASSES.base} onClick={goToCheckoutPage}>GO TO CHECKOUT</Button>
+    </CartDropdownContainerStyled>
   )
 };
 
