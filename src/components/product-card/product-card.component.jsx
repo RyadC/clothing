@@ -10,6 +10,9 @@ import { CartContext } from '../../context/cart.context';
 // COMPONENTS
 import Button from '../button/button.component';
 
+// DATAS
+import { BUTTON_TYPE_CLASSES } from '../button/button.component';
+
 
 // MY COMPONENT
 const ProductCard = (props) => {
@@ -26,7 +29,7 @@ const ProductCard = (props) => {
         <span className='name'>{name}</span>
         <span className='price'>{price}</span>
       </div>
-      <Button buttonType='inverted' onClick={addProductToCart}>Add to card</Button>    
+      <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addProductToCart}>Add to card</Button>    
     </div>
   )
 };
