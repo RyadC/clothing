@@ -1,5 +1,9 @@
 //STYLES
-import './form-input.styles.scss';
+import {
+  FormInputLabelStyled,
+  FormInputStyled,
+  GroupStyled,
+} from './form-input.styles.jsx';
 
 
 const FormInput = (props) => {
@@ -7,15 +11,15 @@ const FormInput = (props) => {
   const { label, inputOptions } = props
 
   return (
-    <div className="group">
-      <input className='form-input' {...inputOptions} />
-      {label && (
-        <label 
-        className={`${inputOptions.value.length ? 'shrink' : ''} form-input-label`} htmlFor="">
-          {label}
-        </label>
-      )}
-    </div>
+    <GroupStyled>
+      <FormInputStyled {...inputOptions} />
+      {
+        label && 
+          ( <FormInputLabelStyled shrink={inputOptions.value.length} htmlFor="">
+            {label}
+          </FormInputLabelStyled>)
+      }
+    </GroupStyled>
   )
 }
 

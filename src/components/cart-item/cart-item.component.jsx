@@ -1,5 +1,9 @@
 // STYLES
-import './cart-item.styles.scss';
+import {
+  NameCartItemStyled,
+  ItemDetailsStyled,
+  CartItemContainerStyled,
+} from './cart-item.styles.jsx';
 
 
 // MY COMPONENT
@@ -9,13 +13,13 @@ const CartItem = (props) => {
   const { name, imageUrl, price, quantity } = cartItem;
 
   return (
-    <div className='cart-item-container'>
+    <CartItemContainerStyled>
       <img src={imageUrl} alt={name} />
-      <div className='item-details'>
-        <span className='name'>{name}</span>
+      <ItemDetailsStyled>
+        <NameCartItemStyled>{name}</NameCartItemStyled>
         <span className='price'>{quantity} x ${price}</span>
-      </div>
-    </div>
+      </ItemDetailsStyled>
+    </CartItemContainerStyled>
   )
 };
 

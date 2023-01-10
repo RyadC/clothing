@@ -1,5 +1,5 @@
-// STYLES
-import './directory.styles.scss';
+// STYLED COMPONENT
+import { DirectoryContainerStyled } from './directory.styles.jsx';
 
 // COMPONENTS
 import DirectoryItem from '../directory-item/directory-item.component';
@@ -10,11 +10,11 @@ const Directory = (props) => {
   const { categories } = props;
 
   return (
-    <div className='directory-container'>
+    <DirectoryContainerStyled>
       {categories.map((category) => (
         <DirectoryItem key={category.id} category={category} />
       ))}
-    </div>
+    </DirectoryContainerStyled>
   )
 }
 

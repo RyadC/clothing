@@ -1,5 +1,7 @@
 // STYLED COMPONENT
 import styled from "styled-components";
+
+// OTHER COMPONENTS
 import {
   BaseButton,
   GoogleSignInButton,
@@ -39,10 +41,3 @@ export const CartItemsStyled = styled.div`
   flex-direction: column;
   overflow: scroll;
 `;
-
-
-
-  // button {
-  //   margin-top: auto;
-  // }
-
