@@ -2,7 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 // STYLES
-import './shop.styles.scss';
+import './shop.styles.jsx';
 
 // COMPONENT
 import CategoriesPreview from '../categories-preview/categories-preview.routes-component';

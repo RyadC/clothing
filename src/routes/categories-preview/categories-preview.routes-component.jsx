@@ -5,7 +5,7 @@ import { Fragment, useContext } from 'react';
 import { CategoriesContext } from '../../context/categories.context';
 
 // STYLES
-import './categories-preview.styles.scss';
+import './categories-preview.styles.jsx';
 
 // COMPONENT
 import CategoryPreview from '../../components/categories-preview/category-preview.component';

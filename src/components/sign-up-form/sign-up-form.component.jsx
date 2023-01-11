@@ -4,8 +4,11 @@ import { useState } from "react";
 // FIREBASE
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../../utils/firebase/firebase.utils";
 
-//STYLES
-import "./sign-up-form.styles.scss"
+// STYLED COMPONENT
+import { 
+  SignUpContainerStyled,
+  TitleSignUpFormStyled
+ } from "./sign-up-form.styles.jsx"
 
 // COMPONENTS
 import FormInput from "../form-input/form-input.component";
@@ -65,8 +68,8 @@ const SignUpForm = () => {
 
 
   return (
-    <div className="sign-up-container">
-      <h2>Don't have an account?</h2>
+    <SignUpContainerStyled>
+      <TitleSignUpFormStyled>Don't have an account?</TitleSignUpFormStyled>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
         <FormInput 
@@ -115,7 +118,7 @@ const SignUpForm = () => {
 
         <Button type="submit">Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainerStyled>
   )
 };
 

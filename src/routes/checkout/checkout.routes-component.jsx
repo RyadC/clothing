@@ -2,7 +2,12 @@
 import { useContext } from 'react';
 
 // STYLES
-import './checkout.styles.scss';
+import {
+  HeaderBlockStyled,
+  CheckoutContainerStyled,
+  CheckoutHeaderStyled,
+  TotalStyled,
+ } from './checkout.styles.jsx';
 
 // DATA'S COMPONENTS
 import { CartContext } from '../../context/cart.context';
@@ -17,24 +22,28 @@ const Checkout = () => {
   const { addItemToCart, removeItemToCart } = useContext(CartContext);
   
   return (
-    <div className='checkout-container'>
-      <div className='checkout-header'>
-        <div className='header-block'>
+    <CheckoutContainerStyled>
+      <CheckoutHeaderStyled>
+        <HeaderBlockStyled>
           <span>Product</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockStyled>
+
+        <HeaderBlockStyled>
           <span>Description</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockStyled>
+
+        <HeaderBlockStyled>
           <span>Quantity</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockStyled>
+
+        <HeaderBlockStyled>
           <span>Price</span>
-        </div>
-        <div className='header-block'>
+        </HeaderBlockStyled>
+        
+        <HeaderBlockStyled>
           <span>Remove</span>
-        </div>
-      </div>
+        </HeaderBlockStyled>
+      </CheckoutHeaderStyled>
         {
           cartItems.map((cartItem) => {
             return (
@@ -42,8 +51,8 @@ const Checkout = () => {
             )
           })
         }
-        <span className='total'>Total: {cartTotal}€</span>
-    </div>
+        <TotalStyled>Total: {cartTotal}€</TotalStyled>
+    </CheckoutContainerStyled>
   );
 };
 
