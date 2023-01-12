@@ -1,3 +1,6 @@
+// REACT ROUTER DOM
+import { useNavigate } from 'react-router-dom';
+
 // STYLED COMPONENTS
 import { 
   DirectoryItemContainerStyled,
@@ -5,19 +8,24 @@ import {
   BackgroundImageStyled,
 } from  './directory-item.styles.jsx';
 
-const DirectoryItem = (props) => {
 
+// MY COMPONENT
+const DirectoryItem = (props) => {
   const { category } = props;
   const { imageUrl } = category;
 
+  const navigate = useNavigate();
+
+  const onNavigateHandler = () => navigate(category.route);
+
   return (
-    <DirectoryItemContainerStyled>
-      <BackgroundImageStyled imageUrl={imageUrl} />
-      <DirectoryItemBodyStyled>
-        <h2>{category.title}</h2>
-        <p>Découvrir</p>
-      </DirectoryItemBodyStyled>
-    </DirectoryItemContainerStyled>
+      <DirectoryItemContainerStyled onClick={onNavigateHandler}>
+        <BackgroundImageStyled imageUrl={imageUrl} />
+        <DirectoryItemBodyStyled>
+          <h2>{category.title}</h2>
+          <p>Découvrir</p>
+        </DirectoryItemBodyStyled>
+      </DirectoryItemContainerStyled>
   )
 
 }

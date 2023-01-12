@@ -23,7 +23,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedLsitener((user) => {
-      console.log(user)
       if(user) {
         // Cette fonction ne créé le user document que si celui-ci n'existe pas dans la BDD (voir corps de fonction)
         createUserDocumentFromAuth(user);
